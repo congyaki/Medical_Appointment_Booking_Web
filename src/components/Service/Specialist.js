@@ -1,102 +1,108 @@
 import React, { useState } from 'react';
 import '../../styles/Specialist.scss';
 import DoctorCards from '../../components/Service/DoctorCard.js';
-import Datetime from '../../components/Service/Datetime.js';
-import Profile from '../../components/Service/Profile.js';
-import Confirm from '../../components/Service/Confirm.js';
-import FindDoctor from '../../components/HomePage/FindDoctor.js';
+import Calendar from '../../components/Service/Datetime.js';
 import { getDoctorsBySpecialty } from '../../services/apiService';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
-const SpecialtySelection = ({ specialties, onBookingClick }) => {
+const SpecialtySelection = ({ specialties, onSpecialtySelect, hideSpecialist }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedSpecialty, setSelectedSpecialty] = useState(null);
-    const [doctors, setDoctors] = useState([]);
 
     const handleSpecialtySelect = async (specialty) => {
-        setSelectedSpecialty(specialty);
         try {
-            const data = await getDoctorsBySpecialty(specialty.id); // Sử dụng hàm mới để lấy danh sách bác sĩ
-            setDoctors(data);
+            const data = await getDoctorsBySpecialty(specialty.id);
+            onSpecialtySelect(data); // Truyền danh sách bác sĩ lên `Specialist`
+            hideSpecialist(); // Ẩn Specialist khi đã chọn chuyên khoa
         } catch (error) {
             console.error('Failed to fetch doctors:', error);
         }
     };
 
     return (
-        <>
-            <div className="specialty-selection">
-                <h2>Please select a specialty</h2>
-                <input
-                    type="text"
-                    placeholder="Find a specialty"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <div className="specialty-list">
-                    {specialties.map((specialty, index) => (
+        <div className="specialty-selection">
+            <h2>Please select a specialty</h2>
+            <input
+                type="text"
+                placeholder="Find a specialty"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <div className="specialty-list">
+                {specialties
+                    .filter(specialty => specialty.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((specialty, index) => (
                         <div key={index} className="specialty-item" onClick={() => handleSpecialtySelect(specialty)}>
                             <h3>{specialty.name}</h3>
                             <p>{specialty.description}</p>
                         </div>
                     ))}
-                </div>
             </div>
-            <div>
-                {selectedSpecialty && (
-                    <div className="doctor-cards-container">
-                        <DoctorCards doctors={doctors} onBookingClick={onBookingClick} />
-                    </div>
-                )}
-            </div>
-        </>
+        </div>
     );
 };
 
-
 function Specialist({ specialties }) {
-    const [currentView, setCurrentView] = useState('specialty');
-    const [previousView, setPreviousView] = useState(null);
-    const [history, setHistory] = useState([]);
+    const [showSpecialist, setShowSpecialist] = useState(true);
+    const [doctors, setDoctors] = useState([]);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
+    const [step, setStep] = useState(1); // 1: Chọn chuyên khoa, 2: Chọn bác sĩ, 3: Chọn lịch
+    const navigate = useNavigate();
 
-    const handleBookingClick = () => {
-        setPreviousView(currentView);
-        setHistory(prevHistory => [...prevHistory, currentView]);
-        setCurrentView('datetime');
+    const handleHideSpecialist = () => {
+        setShowSpecialist(false);
     };
 
-    const handleNextClick = () => {
-        setPreviousView(currentView);
-        setHistory(prevHistory => [...prevHistory, currentView]);
-        setCurrentView('profile');
+    const handleSpecialtySelect = (doctors) => {
+        setDoctors(doctors); // Cập nhật danh sách bác sĩ
+        setStep(2); // Chuyển sang bước chọn bác sĩ
     };
 
-    const handleProfileNextClick = () => {
-        setPreviousView(currentView);
-        setHistory(prevHistory => [...prevHistory, currentView]);
-        setCurrentView('confirm');
+    const handleDoctorSelect = (doctor) => {
+        setSelectedDoctor(doctor); // Cập nhật bác sĩ được chọn
+        setStep(3); // Chuyển sang bước chọn lịch
     };
 
     const handleBackClick = () => {
-        if (history.length > 0) {
-            const prevView = history.pop();
-            setCurrentView(prevView);
+        if (step === 2) {
+            setStep(1);
+            setShowSpecialist(true);
+        } else if (step === 3) {
+            setStep(2);
+            setSelectedDoctor(null);
+        }
+    };
+
+    const handleNextClick = () => {
+        const token = Cookies.get('authToken');
+        if (!token) {
+            navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu chưa có JWT token
+        } else {
+            // TODO: Xử lý bước tiếp theo (chọn ngày giờ, tạo cuộc hẹn, v.v.)
         }
     };
 
     return (
-        <div className="specialist">
-            {currentView === 'specialty' && <FindDoctor />}
-            {currentView === 'specialty' && (
-                <SpecialtySelection specialties={specialties} onBookingClick={handleBookingClick} />
+        <div className="specialist-container">
+            {step === 1 && (
+                <SpecialtySelection
+                    specialties={specialties}
+                    onSpecialtySelect={handleSpecialtySelect}
+                    hideSpecialist={handleHideSpecialist}
+                />
             )}
-            {currentView === 'datetime' && (
-                <Datetime onNextClick={handleNextClick} onBackClick={handleBackClick} />
+            {step === 2 && (
+                <div className="doctor-selection">
+                    <button className="back-button" onClick={handleBackClick}>Back</button>
+                    <DoctorCards doctors={doctors} onDoctorSelect={handleDoctorSelect} />
+                </div>
             )}
-            {currentView === 'profile' && (
-                <Profile onNextProfileClick={handleProfileNextClick} onBackClick={handleBackClick} />
-            )}
-            {currentView === 'confirm' && (
-                <Confirm onBackClick={handleBackClick} />
+            {step === 3 && (
+                <div className="calendar-selection">
+                    <button className="back-button" onClick={handleBackClick}>Back</button>
+                    <Calendar doctor={selectedDoctor} />
+                    <button className="next-button" onClick={handleNextClick}>Next</button>
+                </div>
             )}
         </div>
     );

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import './Account.scss';
 import { useNavigate } from 'react-router-dom';
+import { login, setAuthToken } from '../../services/apiService';
 
-const Login = (history) => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        // TODO: Xử lý đăng nhập với email và mật khẩu
-        console.log({
-            email,
-            password
-        });
+    const handleLogin = async () => {
+        try {
+            const credentials = { email, password };
+            const response = await login(credentials);
+            setAuthToken(response.token); // Lưu JWT token vào cookie
+            navigate('/'); // Chuyển hướng đến trang chính hoặc trang bạn muốn
+        } catch (error) {
+            console.error('Failed to login:', error);
+            alert('Login failed. Please check your credentials and try again.');
+        }
     };
 
     const handleGoogleLogin = () => {
@@ -32,7 +37,6 @@ const Login = (history) => {
     };
 
     return (
-
         <div className="containerlogin">
             <h1 className="title">Healthcare</h1>
             <p className="subtitle">Please log in to continue</p>

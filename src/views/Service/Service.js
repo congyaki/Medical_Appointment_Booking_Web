@@ -13,7 +13,7 @@ function Service() {
     return (
         <div className="Service">
             <Header />
-            <SectionService />
+            {/* <SectionService /> */}
             <Specialist specialties={specialties} />
             <Footer />
         </div>

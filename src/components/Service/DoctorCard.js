@@ -3,7 +3,7 @@ import { FaStar } from 'react-icons/fa';
 import '../../styles/DoctorCard.scss';
 import logo from '../../assets/images/Logo.png';
 
-function DoctorCard({ doctor }) {
+function DoctorCard({ doctor, onBookingClick }) {
     const [rating, setRating] = useState(5); // Thiết lập mặc định là 5 sao
 
     return (
@@ -33,7 +33,10 @@ function DoctorCard({ doctor }) {
                 <p>Experience: {doctor.experience}</p>
                 <div className="doctor-card__action">
                     <img src={logo} alt="Doctor" className="doctor-card__image" />
-                    <button className="btn" onClick={() => console.log('Booking', doctor)}>Booking</button>
+                    <button className="btn" onClick={(e) => {
+                        e.stopPropagation();
+                        onBookingClick(doctor);
+                    }}>Booking</button>
                 </div>
             </div>
         </div>
