@@ -13,9 +13,7 @@ const PatientProfile = ({ patient, onDelete, onNextProfileClick, onBackClick }) 
                 <button className="edit">Edit</button>
                 <button className="next" onClick={onNextProfileClick}>Next</button>
             </div>
-
         </div>
-
     );
 };
 
@@ -51,7 +49,6 @@ const Profile = ({ onNextProfileClick, onBackClick }) => {
                         patient={patient}
                         onDelete={handleDelete}
                         onNextProfileClick={onNextProfileClick}
-                        onBackClick={onBackClick}
                     />
                 ))}
             </div>

@@ -5,6 +5,45 @@
     padding: 10px 180px 15px 180px;
 }
 
+.user-name,
+.log-out {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.user-name {
+    color: #05CCF8;
+    background-color: #ECECEC;
+    margin-top: 5px;
+}
+
+.log-out {
+    margin-top: 5px;
+    background-color: #05CCF8;
+    color: #FFFFFF;
+    height: 50px;
+    width: 150px;
+}
+
+
+.log-out:hover {
+    filter: brightness(1.1); /* Tăng độ sáng */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); /* Hiển thị shadow */
+    transition: 0.4s all;
+
+}
+.appointments:hover {
+    filter: brightness(1.1); /* Tăng độ sáng */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); /* Hiển thị shadow */
+    transition: 0.4s all;
+}
+
+
 .logo {
     font-size: 30px;
     font-weight: bold;

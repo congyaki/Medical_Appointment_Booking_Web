@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import '../../styles/Specialist.scss';
 import DoctorCards from '../../components/Service/DoctorCard.js';
 import Calendar from '../../components/Service/Datetime.js';
+import Profile from '../../components/Service/Profile.js';
 import { getDoctorsBySpecialty } from '../../services/apiService';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-
 
 const SpecialtySelection = ({ specialties, onSpecialtySelect, hideSpecialist }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -47,7 +47,7 @@ function Specialist({ specialties }) {
     const [showSpecialist, setShowSpecialist] = useState(true);
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
-    const [step, setStep] = useState(1); // 1: Chọn chuyên khoa, 2: Chọn bác sĩ, 3: Chọn lịch
+    const [step, setStep] = useState(1); // 1: Chọn chuyên khoa, 2: Chọn bác sĩ, 3: Chọn lịch, 4: Chọn profile, 5: confirm Appointment
     const navigate = useNavigate();
 
     const handleHideSpecialist = () => {
@@ -71,6 +71,8 @@ function Specialist({ specialties }) {
         } else if (step === 3) {
             setStep(2);
             setSelectedDoctor(null);
+        } else if (step === 4) {
+            setStep(3);
         }
     };
 
@@ -79,10 +81,13 @@ function Specialist({ specialties }) {
         if (!token) {
             navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu chưa có JWT token
         } else {
-            navigate('/profile'); // Chuyển hướng đến trang Profile nếu đã có JWT token
+            if (step === 3) {
+                setStep(4); // Chuyển sang bước chọn profile
+            } else if (step === 4) {
+                setStep(5); // Chuyển sang bước xác nhận cuộc hẹn
+            }
         }
     };
-    
 
     return (
         <div className="specialist-container">
@@ -102,9 +107,11 @@ function Specialist({ specialties }) {
             {step === 3 && (
                 <div className="calendar-selection">
                     <button className="back-button" onClick={handleBackClick}>Back</button>
-                    <Calendar doctor={selectedDoctor} />
-                    <button className="next-button" onClick={handleNextClick}>Next</button>
+                    <Calendar onNextClick={handleNextClick} onBackClick={handleBackClick} />
                 </div>
+            )}
+            {step === 4 && (
+                <Profile onNextProfileClick={handleNextClick} onBackClick={handleBackClick} />
             )}
         </div>
     );

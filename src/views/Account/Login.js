@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Account.scss';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../services/apiService'; // Import login từ apiService
+import { login, setAuthToken } from '../../services/apiService'; // Import login và setAuthToken từ apiService
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,8 +13,11 @@ const Login = () => {
             const credentials = { email, password };
             const response = await login(credentials); // Gọi hàm login từ apiService
             if (response && response.token) {
-                // Nếu có token trả về từ apiService
-                navigate('/'); // Chuyển hướng về trang chính hoặc trang bạn muốn
+                // Lưu token vào cookie
+                setAuthToken(response.token);
+                // Lưu thông tin người dùng vào localStorage
+                localStorage.setItem('userName', response.userName);
+                navigate('/');
             } else {
                 alert('Login failed. Please check your credentials and try again.');
             }

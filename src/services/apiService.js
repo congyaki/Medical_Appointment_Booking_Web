@@ -95,7 +95,27 @@ const getDoctorsBySpecialty = async (specialtyId) => {
     }
 };
 
-const getPatientProfiles = () => fetchWithAuth(`${API_BASE_URL}/PatientRecords`);
+const getPatientRecordOfCustomer = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/PatientRecords`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getAuthToken()}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Failed to fetch patient records:', error);
+        throw error;
+    }
+};
+
 
 const createAppointment = (appointment) => fetchWithAuth(`${API_BASE_URL}/Appointment`, {
     method: 'POST',
@@ -109,6 +129,6 @@ export {
     login,
     getSpecialties,
     getDoctorsBySpecialty,
-    getPatientProfiles,
+    getPatientRecordOfCustomer,
     createAppointment
 };
