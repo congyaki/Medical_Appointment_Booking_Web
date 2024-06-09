@@ -4,6 +4,8 @@ import { generateDate, months } from '../../utils/calendar';
 import cn from '../../utils/cn';
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import '../../styles/Calendar.scss';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export default function Calendar({ onNextClick, onBackClick }) {
     const days = ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"];
@@ -16,6 +18,17 @@ export default function Calendar({ onNextClick, onBackClick }) {
         '11:00 AM', '11:30 AM', '14:00 PM', '14:30 PM',
         '15:00 PM', '15:30 PM', '16:00 PM', '16:30 PM'
     ];
+
+    const navigate = useNavigate();
+
+    const handleNextClick = () => {
+        const token = Cookies.get('authToken');
+        if (!token) {
+            navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu chưa có JWT token
+        } else {
+            onNextClick(); // Gọi hàm onNextClick để xử lý bước tiếp theo
+        }
+    };
 
     return (
         <div className="calendar-container">
@@ -82,7 +95,7 @@ export default function Calendar({ onNextClick, onBackClick }) {
                                 </button>
                             ))}
                         </div>
-                        <button className="next-button" onClick={onNextClick} >NEXT</button>
+                        <button className="next-button" onClick={handleNextClick} >NEXT</button>
                         <button onClick={onBackClick} className='back'>Back</button>
                     </div>
                 )}

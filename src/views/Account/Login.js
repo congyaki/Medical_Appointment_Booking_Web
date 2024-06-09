@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Account.scss';
 import { useNavigate } from 'react-router-dom';
-import { login, setAuthToken } from '../../services/apiService';
+import { login } from '../../services/apiService'; // Import login từ apiService
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,9 +11,13 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             const credentials = { email, password };
-            const response = await login(credentials);
-            setAuthToken(response.token); // Lưu JWT token vào cookie
-            navigate('/'); // Chuyển hướng đến trang chính hoặc trang bạn muốn
+            const response = await login(credentials); // Gọi hàm login từ apiService
+            if (response && response.token) {
+                // Nếu có token trả về từ apiService
+                navigate('/'); // Chuyển hướng về trang chính hoặc trang bạn muốn
+            } else {
+                alert('Login failed. Please check your credentials and try again.');
+            }
         } catch (error) {
             console.error('Failed to login:', error);
             alert('Login failed. Please check your credentials and try again.');

@@ -6,6 +6,7 @@ import { getDoctorsBySpecialty } from '../../services/apiService';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
+
 const SpecialtySelection = ({ specialties, onSpecialtySelect, hideSpecialist }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -78,9 +79,10 @@ function Specialist({ specialties }) {
         if (!token) {
             navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu chưa có JWT token
         } else {
-            // TODO: Xử lý bước tiếp theo (chọn ngày giờ, tạo cuộc hẹn, v.v.)
+            navigate('/profile'); // Chuyển hướng đến trang Profile nếu đã có JWT token
         }
     };
+    
 
     return (
         <div className="specialist-container">
