@@ -1,0 +1,60 @@
+.choose {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-top: 70px;
+
+    .choose-content {
+        max-width: 30%;
+        padding-left: 350px;
+
+        h1 {
+            font-size: 25px;
+            color: #05CCF8;
+        }
+
+        p {
+            font-size: 18px;
+            color: #777;
+            margin: 10px 0;
+        }
+
+        .choose-buttons {
+
+            .get-started,
+            .talk-to-sales {
+                padding: 8px 15px;
+                margin-top: 25px;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+                width: 170px;
+                height: 60px;
+                font-size: 18px;
+            }
+
+            .get-started {
+                background-color: #05CCF8;
+                color: #fff;
+            }
+
+            .talk-to-sales {
+                background-color: #fff;
+                color: #05CCF8;
+                border: 1px;
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .choose-image {
+        max-width: 50%;
+        padding-right: 230px;
+
+        img {
+            width: 80%;
+            border-radius: 10px;
+        }
+    }
+}

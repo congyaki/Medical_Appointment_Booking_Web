@@ -1,0 +1,35 @@
+.results {
+    background-color: #ECECEC;
+    max-width: 100%;
+}
+
+.results h2 {
+    font-size: 24px;
+    color: #05CCF8;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.stats {
+    display: flex;
+    gap: 200px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.stat {
+    text-align: center;
+
+}
+
+.stat span {
+    font-size: 36px;
+    color: #05CCF8;
+    font-weight: 700;
+
+}
+
+.stat p {
+    color: #555;
+    font-weight: 700;
+}

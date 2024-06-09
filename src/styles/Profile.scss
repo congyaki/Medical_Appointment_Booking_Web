@@ -1,0 +1,99 @@
+.profile {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        color: #05CCF8;
+        text-align: center;
+        margin-bottom: 24px;
+        font-size: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.patient-profile {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    padding: 0 15px 15px 15px;
+    margin-top: 20px;
+
+    h2 {
+        color: #00AEEF;
+    }
+
+    p {
+        margin: 4px 0;
+        color: #517589;
+    }
+
+    .buttons {
+        margin-top: 16px;
+
+        button {
+            margin-right: 8px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            height: 40px;
+
+            &.delete {
+                background-color: #FF5A5F;
+                color: white;
+
+                &:hover {
+                    background-color: #E04C4F;
+                    transform: scale(1.05);
+                }
+            }
+
+            &.edit {
+                background-color: #3699FF;
+                color: white;
+
+                &:hover {
+                    background-color: #2B8AE6;
+                    transform: scale(1.05);
+                }
+            }
+
+            &.next {
+                background-color: #05CCF8;
+                color: white;
+                margin-left: 100px;
+
+                &:hover {
+                    background-color: #04B2D6;
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+}
+
+.back-profile {
+    background-color: #05CCF8;
+    color: white;
+    border: none;
+    width: 90px;
+    height: 30px;
+    padding: 6px 15px 15px 15px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 200;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    margin-left: 750px;
+
+    &:hover {
+        background-color: #29566F;
+    }
+}

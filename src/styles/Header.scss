@@ -1,0 +1,82 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 180px 15px 180px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #05CCF8;
+    margin-top: 5px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    position: relative;
+    /* Để ::before hoạt động dựa trên a */
+    margin-left: 50px;
+    padding-top: 5px;
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    /* Đặt dưới dòng text */
+    left: 50%;
+    background-color: #05CCF8;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
+
+nav a:hover {
+    color: #05CCF8;
+}
+
+nav a:hover::before {
+    visibility: visible;
+    width: 100%;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.sign-up {
+    color: #05CCF8;
+    background-color: #ECECEC;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.log-in {
+    margin-top: 5px;
+    background-color: #05CCF8;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 20px;
+    border: 1px;
+    height: 50px;
+    width: 150px;
+    border-radius: 10px;
+}

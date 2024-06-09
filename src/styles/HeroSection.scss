@@ -1,0 +1,55 @@
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 220px 0px 220px;
+
+}
+
+.hero-content {
+    max-width: 50%;
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    color: #05CCF8;
+}
+
+.hero-content p {
+    margin: 20px 0;
+    color: #555;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 90px;
+}
+
+button.appointments {
+    background-color: #05CCF8;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 230px;
+    height: 55px;
+}
+
+button.watch-video {
+    background-color: #fff;
+    color: #00aaff;
+    border: 2px solid #05CCF8;
+    width: 230px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.hero-image {
+    position: relative;
+    padding-top: 30px;
+}
+
+.hero-image img {
+    width: 500px;
+    border-radius: 10px;
+}

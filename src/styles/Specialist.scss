@@ -1,0 +1,84 @@
+.specialty-selection {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
+    h2 {
+        color: #00a9e0;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 95%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .specialty-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .specialty-item {
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        p {
+            margin: 0;
+            color: #666;
+        }
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        &.selected {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+    }
+
+    .doctor-list {
+        margin-top: 20px;
+
+        h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+    }
+
+
+    .return-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #00a9e0;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #008bb5;
+        }
+    }
+}
