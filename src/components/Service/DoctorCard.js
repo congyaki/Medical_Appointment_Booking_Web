@@ -3,11 +3,19 @@ import { FaStar } from 'react-icons/fa';
 import '../../styles/DoctorCard.scss';
 import logo from '../../assets/images/Logo.png';
 
-function DoctorCard({ doctor, onBookingClick }) {
+import { useNavigate } from 'react-router-dom';
+
+function DoctorCard({ doctor, onDoctorSelect }) {
     const [rating, setRating] = useState(5); // Thiết lập mặc định là 5 sao
 
+    const handleDoctorSelect = () => {
+        // Gọi hàm onDoctorSelect với thông tin về bác sĩ
+        onDoctorSelect(doctor);
+        console.log("Selected Doctor:", doctor);
+    };
+
     return (
-        <div className="doctor-card">
+        <div className="doctor-card" onClick={handleDoctorSelect}>
             <div className="doctor-card__info">
                 <div className="rating">
                     {[...Array(5)].map((star, index) => {
@@ -33,24 +41,21 @@ function DoctorCard({ doctor, onBookingClick }) {
                 <p>Experience: {doctor.experience}</p>
                 <div className="doctor-card__action">
                     <img src={logo} alt="Doctor" className="doctor-card__image" />
-                    <button className="btn" onClick={(e) => {
-                        e.stopPropagation();
-                        onBookingClick(doctor);
-                    }}>Booking</button>
+                    <button className="btn">Select</button>
                 </div>
             </div>
         </div>
     );
 }
 
-function DoctorCards({ doctors, onBookingClick }) {
+function DoctorCards({ doctors, onDoctorSelect }) {
     return (
         <div className="doctor-cards">
             {doctors.map(doctor => (
                 <DoctorCard
-                    key={doctor.id} // Sử dụng trường id làm giá trị key
+                    key={doctor.id}
                     doctor={doctor}
-                    onBookingClick={onBookingClick}
+                    onDoctorSelect={onDoctorSelect}
                 />
             ))}
         </div>

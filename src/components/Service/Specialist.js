@@ -12,8 +12,8 @@ const SpecialtySelection = ({ specialties, onSpecialtySelect, hideSpecialist }) 
     const handleSpecialtySelect = async (specialty) => {
         try {
             const data = await getDoctorsBySpecialty(specialty.id);
-            onSpecialtySelect(data); // Truyền danh sách bác sĩ lên `Specialist`
-            hideSpecialist(); // Ẩn Specialist khi đã chọn chuyên khoa
+            onSpecialtySelect(data); // Cập nhật danh sách bác sĩ
+            hideSpecialist(); // Ẩn chuyên khoa sau khi chọn
         } catch (error) {
             console.error('Failed to fetch doctors:', error);
         }
