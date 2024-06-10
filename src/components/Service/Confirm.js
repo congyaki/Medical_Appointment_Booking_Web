@@ -1,12 +1,34 @@
+// Confirm.js
 import React, { useState } from 'react';
 import '../../styles/Confirm.scss';
 import confirm from '../../assets/images/confirm.png';
+import { createAppointment } from '../../services/apiService';
 
 const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, selectedProfile }) => {
     const [isConfirmed, setIsConfirmed] = useState(false);
 
-    const handleConfirm = () => {
-        setIsConfirmed(true);
+    const formatTime = (time) => {
+        const [hours, minutes] = time.split(':');
+        return `${hours}:${minutes}:00`;
+    };
+
+    const handleConfirm = async () => {
+        const formattedTime = formatTime(selectedTime);
+        const appointmentData = {
+            doctorId: selectedDoctor.id,
+            patientRecordId: selectedProfile.id, // Assuming selectedProfile has an id field
+            date: selectedDate,
+            time: formattedTime
+        };
+
+        try {
+            console.log('Sending appointment data:', appointmentData);
+            const response = await createAppointment(appointmentData);
+            console.log('Appointment created successfully:', response);
+            setIsConfirmed(true);
+        } catch (error) {
+            console.error('Failed to create appointment:', error);
+        }
     };
 
     const handleClose = () => {
@@ -29,9 +51,9 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, sele
                     <tbody>
                         <tr>
                             <td>{selectedDoctor.specializationName}</td>
-                            <td>{selectedDoctor.name}</td>
-                            <td>{`${selectedDate}`}</td>
-                            <td>{`${selectedTime}`}</td>
+                            <td>{selectedDoctor.fullName}</td>
+                            <td>{selectedDate}</td>
+                            <td>{selectedTime}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -62,7 +84,7 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, sele
                             </div>
                             <div className="popup-message">
                                 <h2 className="title">Your Appointment Has Been Confirmed</h2>
-                                <p className="content">Your appointment with {selectedDoctor.name} on {selectedDate} at {selectedTime} has been confirmed.</p>
+                                <p className="content">Your appointment with {selectedDoctor.fullName} on {selectedDate} at {selectedTime} has been confirmed.</p>
                                 <button className="view-appointment-button">View Appointment</button>
                             </div>
                         </div>

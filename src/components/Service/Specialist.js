@@ -1,3 +1,4 @@
+// Specialist.js
 import React, { useState } from 'react';
 import '../../styles/Specialist.scss';
 import DoctorCards from '../../components/Service/DoctorCard.js';
@@ -66,6 +67,7 @@ function Specialist({ specialties }) {
 
     const handleDoctorSelect = (doctor) => {
         setSelectedDoctor(doctor); // Cập nhật bác sĩ được chọn
+        console.log(doctor);
         setStep(3); // Chuyển sang bước chọn lịch
     };
 

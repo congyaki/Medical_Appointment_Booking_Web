@@ -22,6 +22,7 @@ const fetchWithAuth = async (url, options = {}) => {
     };
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
+        console.log('Token used for API call:', token);
     }
     const response = await fetch(url, {
         ...options,
@@ -117,10 +118,18 @@ const getPatientRecordOfCustomer = async () => {
 };
 
 
-const createAppointment = (appointment) => fetchWithAuth(`${API_BASE_URL}/Appointment`, {
-    method: 'POST',
-    body: JSON.stringify(appointment)
-});
+const createAppointment = (appointment) => {
+    const token = getAuthToken();
+    console.log('Token used for createAppointment API call:', token); // Log token được sử dụng
+    return fetchWithAuth(`${API_BASE_URL}/Appointment`, {
+        method: 'POST',
+        body: JSON.stringify(appointment),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Thêm header Authorization
+        }
+    });
+};
 
 export {
     getAuthToken,
