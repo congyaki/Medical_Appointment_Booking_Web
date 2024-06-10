@@ -6,6 +6,7 @@ import Profile from '../../components/Service/Profile.js';
 import { getDoctorsBySpecialty } from '../../services/apiService';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import Confirm from '../../components/Service/Confirm.js';
 
 const SpecialtySelection = ({ specialties, onSpecialtySelect, hideSpecialist }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -48,6 +49,8 @@ function Specialist({ specialties }) {
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
     const [step, setStep] = useState(1); // 1: Chọn chuyên khoa, 2: Chọn bác sĩ, 3: Chọn lịch, 4: Chọn profile, 5: confirm Appointment
+    const [selectedDate, setSelectedDate] = useState(null); // Thêm state để lưu ngày hẹn
+    const [selectedProfile, setSelectedProfile] = useState(null); // Thêm state để lưu thông tin profile
     const navigate = useNavigate();
 
     const handleHideSpecialist = () => {
@@ -73,6 +76,8 @@ function Specialist({ specialties }) {
             setSelectedDoctor(null);
         } else if (step === 4) {
             setStep(3);
+        } else if (step === 5) {
+            setStep(4);
         }
     };
 
@@ -84,7 +89,7 @@ function Specialist({ specialties }) {
             if (step === 3) {
                 setStep(4); // Chuyển sang bước chọn profile
             } else if (step === 4) {
-                setStep(5); // Chuyển sang bước xác nhận cuộc hẹn
+                setStep(5); // Chuyển sang bước confirm
             }
         }
     };
@@ -101,20 +106,37 @@ function Specialist({ specialties }) {
             {step === 2 && (
                 <div className="doctor-selection">
                     <button className="back-button" onClick={handleBackClick}>Back</button>
-                    <DoctorCards doctors={doctors} onDoctorSelect={handleDoctorSelect} />
+                    <DoctorCards doctors={doctors} onDoctorSelect={handleDoctorSelect}/>
                 </div>
             )}
             {step === 3 && (
                 <div className="calendar-selection">
                     <button className="back-button" onClick={handleBackClick}>Back</button>
-                    <Calendar onNextClick={handleNextClick} onBackClick={handleBackClick} />
+                    <Calendar
+                        onNextClick={handleNextClick}
+                        onBackClick={handleBackClick}
+                        onSelectDate={(date) => setSelectedDate(date)} // Cập nhật state khi người dùng chọn ngày
+                    />
                 </div>
             )}
             {step === 4 && (
-                <Profile onNextProfileClick={handleNextClick} onBackClick={handleBackClick} />
+                <Profile
+                    onNextProfileClick={handleNextClick}
+                    onBackClick={handleBackClick}
+                    onSelectProfile={(profile) => setSelectedProfile(profile)} // Cập nhật state khi người dùng chọn profile
+                />
+            )}
+            {step === 5 && (
+                <Confirm
+                    selectedDoctor={selectedDoctor} // Truyền thông tin bác sĩ đã chọn vào Confirm
+                    selectedDate={selectedDate} // Truyền ngày hẹn vào Confirm
+                    selectedProfile={selectedProfile} // Truyền thông tin profile bệnh nhân vào Confirm
+                    onBackClick={handleBackClick}
+                />
             )}
         </div>
     );
 }
 
 export default Specialist;
+

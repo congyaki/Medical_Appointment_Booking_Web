@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/Confirm.scss';
 import confirm from '../../assets/images/confirm.png';
 
-const Confirm = ({ onBackClick }) => {
+const Confirm = ({ onBackClick, selectedDoctor, selectedDate }) => {
     const [isConfirmed, setIsConfirmed] = useState(false);
 
     const handleConfirm = () => {
@@ -24,16 +24,15 @@ const Confirm = ({ onBackClick }) => {
                             <th>Medical specialty</th>
                             <th>Service</th>
                             <th>Appointment time</th>
-                            <th>Medical examination fee</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Orthopedic Surgery</td>
-                            <td>Healthcare hospital specialist</td>
-                            <td>15:00 - 16:00 16/04/2024</td>
-                            <td>3,030,000đ (S$168.48)</td>
+                            <td>{selectedDoctor.specializationName}</td>
+                            <td>{selectedDoctor.name}</td>
+                            <td>{selectedDate}</td>
+                            <td>{selectedDoctor.fee}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -42,14 +41,7 @@ const Confirm = ({ onBackClick }) => {
             <div className="patient-information">
                 <div className="header">Patient information</div>
                 <div className="info">
-                    <p><strong>Full name:</strong> Trần Văn Tâm</p>
-                    <p><strong>Date of birth:</strong> 02/04/2003</p>
-                    <p><strong>Gender:</strong> Man</p>
-                    <p><strong>CMND:</strong> Not update</p>
-                    <p><strong>Email:</strong> Not update</p>
-                    <p><strong>Ethnicity:</strong> Kinh</p>
-                    <p><strong>Health insurance ID:</strong> Not update</p>
-                    <p><strong>Address:</strong> 206, Thanh Bình, Mỗ Lao, Hà Đông</p>
+                    {/* Thông tin của người dùng */}
                 </div>
             </div>
 
@@ -67,10 +59,9 @@ const Confirm = ({ onBackClick }) => {
                                 <img src={confirm} alt="Confirmation" />
                             </div>
                             <div className="popup-message">
-                                <h2 class="title">Your Appointment Has Been Confirmed</h2>
-                                <p class="content">Your appointment with Dr. Jennie Thorn on Wednesday, August 17, 2023 at 11:00 AM</p>
+                                <h2 className="title">Your Appointment Has Been Confirmed</h2>
+                                <p className="content">Your appointment with {selectedDoctor.name} on {selectedDate.toLocaleString()} has been confirmed.</p>
                                 <button className="view-appointment-button">View Appointment</button>
-
                             </div>
                         </div>
                     </div>

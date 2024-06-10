@@ -1,7 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getPatientRecordOfCustomer } from '../../services/apiService';
 import '../../styles/Profile.scss';
 
-const PatientProfile = ({ patient, onDelete, onNextProfileClick, onBackClick }) => {
+const PatientProfile = ({ patient, onDelete, onNextProfileClick, onSelectProfile }) => {
+    const handleNextClick = () => {
+        onNextProfileClick(); // Gọi hàm onNextProfileClick để chuyển đến Confirm component
+    };
+
+    const handleProfileSelect = (patient) => {
+        onSelectProfile(patient); // Truyền thông tin hồ sơ bệnh nhân khi người dùng chọn hồ sơ
+        onNextProfileClick(); // Chuyển đến bước tiếp theo
+    };
+    
+
     return (
         <div className="patient-profile">
             <h2>{patient.name}</h2>
@@ -11,29 +22,36 @@ const PatientProfile = ({ patient, onDelete, onNextProfileClick, onBackClick }) 
             <div className="buttons">
                 <button className="delete" onClick={() => onDelete(patient.id)}>Delete</button>
                 <button className="edit">Edit</button>
-                <button className="next" onClick={onNextProfileClick}>Next</button>
+                <button className="next" onClick={handleNextClick}>Next</button>
+                <button className="select-profile" onClick={handleProfileSelect}>Select Profile</button>
             </div>
         </div>
     );
 };
 
-const Profile = ({ onNextProfileClick, onBackClick }) => {
-    const [patients, setPatients] = useState([
-        {
-            id: 1,
-            name: 'TRẦN VĂN TÂM',
-            dob: '02/04/2003',
-            phone: '0987666666',
-            address: 'Ngõ 206, đường Thanh Bình, Phường Mộ Lao, Quận Hà Đông, Thành phố Hà Nội'
-        },
-        {
-            id: 2,
-            name: 'Đỗ Đức Công',
-            dob: '10/7/2003',
-            phone: '0989722093',
-            address: 'Ngõ 9/23, Gia Lâm, Thành phố Hà Nội'
-        }
-    ]);
+const Profile = ({ onNextProfileClick, onBackClick, onSelectProfile }) => {
+    const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+        const fetchPatientRecords = async () => {
+            try {
+                const data = await getPatientRecordOfCustomer();
+                console.log('Patient records data:', data);
+                const formattedData = data.map(record => ({
+                    id: record.id,
+                    name: `${record.firstName} ${record.lastName}`,
+                    dob: new Date(record.dateOfBirth).toLocaleDateString('en-GB'),
+                    phone: record.phoneNumber,
+                    address: record.address,
+                }));
+                setPatients(formattedData);
+            } catch (error) {
+                console.error('Failed to fetch patient records:', error);
+            }
+        };
+
+        fetchPatientRecords();
+    }, []);
 
     const handleDelete = (id) => {
         setPatients(patients.filter(patient => patient.id !== id));
@@ -49,6 +67,7 @@ const Profile = ({ onNextProfileClick, onBackClick }) => {
                         patient={patient}
                         onDelete={handleDelete}
                         onNextProfileClick={onNextProfileClick}
+                        onSelectProfile={onSelectProfile} // Truyền hàm onSelectProfile xuống PatientProfile
                     />
                 ))}
             </div>

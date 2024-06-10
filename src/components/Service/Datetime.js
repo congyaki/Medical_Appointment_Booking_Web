@@ -24,9 +24,17 @@ export default function Calendar({ onNextClick, onBackClick }) {
     const handleNextClick = () => {
         const token = Cookies.get('authToken');
         if (!token) {
-            navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu chưa có JWT token
+            navigate('/login');
         } else {
-            onNextClick(); // Gọi hàm onNextClick để xử lý bước tiếp theo
+            if (selectDate && selectedTime) {
+                const date = selectDate.toISOString().split('T')[0]; // Lấy ngày
+                const time = selectedTime.split(' ')[0]; // Lấy giờ
+                console.log("Selected date:", date);
+            console.log("Selected time:", time);
+                onNextClick(date, time);
+            } else {
+                alert("Please select both date and time.");
+            }
         }
     };
 
