@@ -6,7 +6,7 @@ const Choose = () => {
     return (
         <header className="choose">
             <div className="choose-content">
-                <h1>You have lots of reasons to choose us</h1>
+                <h1 className='heading'>You have lots of reasons to choose us</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam.</p>
                 <div className="choose-buttons">
                     <button className="get-started">Get started</button>

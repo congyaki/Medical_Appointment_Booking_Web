@@ -4,7 +4,7 @@ import '../../styles/Results.scss';
 const Results = () => {
     return (
         <section className="results">
-            <h2>Our results in numbers</h2>
+            <h2 className='heading'>Our results in numbers</h2>
             <div className="stats">
                 <div className="stat">
                     <span>99%</span>

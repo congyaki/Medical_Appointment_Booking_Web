@@ -6,7 +6,7 @@ import { createAppointment } from '../../services/apiService';
 
 const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, selectedProfile }) => {
     const [isConfirmed, setIsConfirmed] = useState(false);
-
+    const [responseMessage, setResponseMessage] = useState('');
     const formatTime = (time) => {
         const [hours, minutes] = time.split(':');
         return `${hours}:${minutes}:00`;
@@ -26,6 +26,7 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, sele
             const response = await createAppointment(appointmentData);
             console.log('Appointment created successfully:', response);
             setIsConfirmed(true);
+            setResponseMessage(response);
         } catch (error) {
             console.error('Failed to create appointment:', error);
         }
@@ -33,6 +34,11 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, sele
 
     const handleClose = () => {
         setIsConfirmed(false);
+    };
+
+    const handleViewAppointment = () => {
+        // Chuyển về trang Home khi nhấn vào nút View Appointment
+        window.location.href = '/';
     };
 
     return (
@@ -83,9 +89,9 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, sele
                                 <img src={confirm} alt="Confirmation" />
                             </div>
                             <div className="popup-message">
-                                <h2 className="title">Your Appointment Has Been Confirmed</h2>
+                                <h2 className="title">Your Appointment Has Been Confirmed With ID {responseMessage}</h2>
                                 <p className="content">Your appointment with {selectedDoctor.fullName} on {selectedDate} at {selectedTime} has been confirmed.</p>
-                                <button className="view-appointment-button">View Appointment</button>
+                                <button className="view-appointment-button" onClick={handleViewAppointment}>View Appointment</button>
                             </div>
                         </div>
                     </div>

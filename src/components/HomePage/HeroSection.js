@@ -19,7 +19,7 @@ const HeroSection = () => {
     return (
         <section className="hero-section">
             <div className="hero-content">
-                <h1>Providing Quality Healthcare For A Brighter And Healthy Future</h1>
+                <h1 className='heading'>Providing Quality Healthcare For A Brighter And Healthy Future</h1>
                 <p>At Our Hospital, We Are Dedicated To Providing Exceptional Medical Care To Our Patients And Their Families. Our Experienced Team Of Medical Professionals, Cutting-Edge Technology, And Compassionate Approach Make Us A Leader In The Healthcare Industry</p>
                 <div className="buttons">
                     <button className="appointments" onClick={handleAppointmentsClick}>Appointments</button>

@@ -13,20 +13,7 @@ const Header = () => {
         if (user) {
             setUserName(user);
         }
-
-        // Thêm sự kiện listener cho việc đóng trang (unmount)
-        window.addEventListener('beforeunload', handleUnload);
-
-        // Xóa listener khi component unmount
-        return () => {
-            window.removeEventListener('beforeunload', handleUnload);
-        };
-    }, []);
-
-    // Xử lý khi trình duyệt được tắt hoặc chuyển trang
-    const handleUnload = () => {
-        localStorage.removeItem('userName');
-    };
+    }, []); // useEffect này chỉ chạy một lần sau khi component được render
 
     const handleSignUpClick = () => {
         navigate('/register');
@@ -62,7 +49,7 @@ const Header = () => {
                 ) : (
                     <>
                         <button className="sign-up" onClick={handleSignUpClick}>Sign Up</button>
-                        <button className="log-in" onClick={handleLogInClick}>Log In</button>
+                        <button className="log-in" onClick={handleLogInClick}>Sign In</button>
                     </>
                 )}
             </div>
