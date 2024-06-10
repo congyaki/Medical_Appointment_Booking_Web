@@ -94,6 +94,11 @@ function Specialist({ specialties }) {
         }
     };
 
+    const handleProfileSelect = (profile) => {
+        setSelectedProfile(profile); // Cập nhật thông tin hồ sơ bệnh nhân đã chọn
+        console.log("Selected Profile:", profile); // Log thông tin hồ sơ bệnh nhân đã chọn
+    };
+
     return (
         <div className="specialist-container">
             {step === 1 && (
@@ -123,7 +128,7 @@ function Specialist({ specialties }) {
                 <Profile
                     onNextProfileClick={handleNextClick}
                     onBackClick={handleBackClick}
-                    onSelectProfile={(profile) => setSelectedProfile(profile)} // Cập nhật state khi người dùng chọn profile
+                    onSelectProfile={handleProfileSelect} // Cập nhật state khi người dùng chọn profile
                 />
             )}
             {step === 5 && (
@@ -139,4 +144,3 @@ function Specialist({ specialties }) {
 }
 
 export default Specialist;
-

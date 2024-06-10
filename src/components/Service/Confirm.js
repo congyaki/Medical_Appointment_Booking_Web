@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/Confirm.scss';
 import confirm from '../../assets/images/confirm.png';
 
-const Confirm = ({ onBackClick, selectedDoctor, selectedDate }) => {
+const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedProfile }) => {
     const [isConfirmed, setIsConfirmed] = useState(false);
 
     const handleConfirm = () => {
@@ -41,7 +41,10 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate }) => {
             <div className="patient-information">
                 <div className="header">Patient information</div>
                 <div className="info">
-                    {/* Thông tin của người dùng */}
+                    <p><strong>Name:</strong> {selectedProfile.name}</p>
+                    <p><strong>Date of Birth:</strong> {selectedProfile.dob}</p>
+                    <p><strong>Phone Number:</strong> {selectedProfile.phone}</p>
+                    <p><strong>Address:</strong> {selectedProfile.address}</p>
                 </div>
             </div>
 

@@ -3,15 +3,10 @@ import { getPatientRecordOfCustomer } from '../../services/apiService';
 import '../../styles/Profile.scss';
 
 const PatientProfile = ({ patient, onDelete, onNextProfileClick, onSelectProfile }) => {
-    const handleNextClick = () => {
-        onNextProfileClick(); // Gọi hàm onNextProfileClick để chuyển đến Confirm component
-    };
-
-    const handleProfileSelect = (patient) => {
+    const handleProfileSelect = () => {
         onSelectProfile(patient); // Truyền thông tin hồ sơ bệnh nhân khi người dùng chọn hồ sơ
         onNextProfileClick(); // Chuyển đến bước tiếp theo
     };
-    
 
     return (
         <div className="patient-profile">
@@ -22,12 +17,12 @@ const PatientProfile = ({ patient, onDelete, onNextProfileClick, onSelectProfile
             <div className="buttons">
                 <button className="delete" onClick={() => onDelete(patient.id)}>Delete</button>
                 <button className="edit">Edit</button>
-                <button className="next" onClick={handleNextClick}>Next</button>
                 <button className="select-profile" onClick={handleProfileSelect}>Select Profile</button>
             </div>
         </div>
     );
 };
+
 
 const Profile = ({ onNextProfileClick, onBackClick, onSelectProfile }) => {
     const [patients, setPatients] = useState([]);
@@ -75,5 +70,6 @@ const Profile = ({ onNextProfileClick, onBackClick, onSelectProfile }) => {
         </div>
     );
 };
+
 
 export default Profile;
