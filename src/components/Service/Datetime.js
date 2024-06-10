@@ -27,11 +27,8 @@ export default function Calendar({ onNextClick, onBackClick }) {
             navigate('/login');
         } else {
             if (selectDate && selectedTime) {
-                const date = selectDate.toISOString().split('T')[0]; // Lấy ngày
-                const time = selectedTime.split(' ')[0]; // Lấy giờ
-                console.log("Selected date:", date);
-            console.log("Selected time:", time);
-                onNextClick(date, time);
+                const selectedDateTime = `${selectDate.format('YYYY-MM-DD')} ${selectedTime}`;
+                onNextClick(selectedDateTime);
             } else {
                 alert("Please select both date and time.");
             }

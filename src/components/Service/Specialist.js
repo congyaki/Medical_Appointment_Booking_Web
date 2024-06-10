@@ -49,7 +49,9 @@ function Specialist({ specialties }) {
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
     const [step, setStep] = useState(1); // 1: Chọn chuyên khoa, 2: Chọn bác sĩ, 3: Chọn lịch, 4: Chọn profile, 5: confirm Appointment
-    const [selectedDate, setSelectedDate] = useState(null); // Thêm state để lưu ngày hẹn
+    const [selectedDateTime, setSelectedDateTime] = useState(null); // Thêm state để lưu ngày hẹn
+    const [selectedDate, setSelectedDate] = useState(null); // State cho ngày
+    const [selectedTime, setSelectedTime] = useState(null); // State cho giờ
     const [selectedProfile, setSelectedProfile] = useState(null); // Thêm state để lưu thông tin profile
     const navigate = useNavigate();
 
@@ -81,12 +83,16 @@ function Specialist({ specialties }) {
         }
     };
 
-    const handleNextClick = () => {
+    const handleNextClick = (dateTime) => {
         const token = Cookies.get('authToken');
         if (!token) {
             navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu chưa có JWT token
         } else {
             if (step === 3) {
+                setSelectedDateTime(dateTime); // Cập nhật state khi người dùng chọn ngày giờ
+                const [date, time] = dateTime.split(' ');
+                setSelectedDate(date);
+                setSelectedTime(time);
                 setStep(4); // Chuyển sang bước chọn profile
             } else if (step === 4) {
                 setStep(5); // Chuyển sang bước confirm
@@ -120,7 +126,6 @@ function Specialist({ specialties }) {
                     <Calendar
                         onNextClick={handleNextClick}
                         onBackClick={handleBackClick}
-                        onSelectDate={(date) => setSelectedDate(date)} // Cập nhật state khi người dùng chọn ngày
                     />
                 </div>
             )}
@@ -135,6 +140,7 @@ function Specialist({ specialties }) {
                 <Confirm
                     selectedDoctor={selectedDoctor} // Truyền thông tin bác sĩ đã chọn vào Confirm
                     selectedDate={selectedDate} // Truyền ngày hẹn vào Confirm
+                    selectedTime={selectedTime} // Truyền giờ hẹn vào Confirm
                     selectedProfile={selectedProfile} // Truyền thông tin profile bệnh nhân vào Confirm
                     onBackClick={handleBackClick}
                 />

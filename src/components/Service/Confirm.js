@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/Confirm.scss';
 import confirm from '../../assets/images/confirm.png';
 
-const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedProfile }) => {
+const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, selectedProfile }) => {
     const [isConfirmed, setIsConfirmed] = useState(false);
 
     const handleConfirm = () => {
@@ -20,19 +20,18 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedProfile })
                 <table>
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Medical specialty</th>
-                            <th>Service</th>
-                            <th>Appointment time</th>
+                            <th>Doctor</th>
+                            <th>Appointment Date</th>
+                            <th>Appointment Time</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
                             <td>{selectedDoctor.specializationName}</td>
                             <td>{selectedDoctor.name}</td>
-                            <td>{selectedDate}</td>
-                            <td>{selectedDoctor.fee}</td>
+                            <td>{`${selectedDate}`}</td>
+                            <td>{`${selectedTime}`}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -63,7 +62,7 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedProfile })
                             </div>
                             <div className="popup-message">
                                 <h2 className="title">Your Appointment Has Been Confirmed</h2>
-                                <p className="content">Your appointment with {selectedDoctor.name} on {selectedDate.toLocaleString()} has been confirmed.</p>
+                                <p className="content">Your appointment with {selectedDoctor.name} on {selectedDate} at {selectedTime} has been confirmed.</p>
                                 <button className="view-appointment-button">View Appointment</button>
                             </div>
                         </div>
