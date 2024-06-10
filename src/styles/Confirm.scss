@@ -3,6 +3,7 @@
     max-width: 80%;
     width: 50%;
     margin: 0 auto;
+    margin-top: 150px;
 
     .confirm-examination,
     .patient-information {
@@ -11,7 +12,7 @@
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-        .header {
+        .headerconfirm {
             background-color: #05CCF8;
             color: white;
             padding: 10px 25px;
@@ -95,6 +96,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .title {

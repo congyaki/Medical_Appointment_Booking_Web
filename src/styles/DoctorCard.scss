@@ -5,6 +5,7 @@
     gap: 20px;
     padding-right: 250px;
     padding-left: 250px;
+    margin-top: 150px;
 }
 
 .doctor-card {
@@ -67,5 +68,25 @@
                 background-color: #007bff;
             }
         }
+    }
+    
+}
+.back-doctor {
+    background-color: #05CCF8;
+    color: white;
+    border: none;
+    width: 90px;
+    height: 30px;
+    padding: 6px 15px 15px 15px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 200;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    margin-left: 500px;
+
+    &:hover {
+        background-color: #29566F;
     }
 }

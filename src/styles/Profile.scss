@@ -5,6 +5,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 150px;
+    margin-bottom: 400px;
 
     h1 {
         color: #05CCF8;
@@ -12,6 +14,25 @@
         margin-bottom: 24px;
         font-size: 40px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .back-profile {
+        background-color: #05CCF8;
+        color: white;
+        border: none;
+        width: 90px;
+        height: 30px;
+        padding: 6px 15px 15px 15px;
+        border-radius: 30px;
+        font-size: 15px;
+        font-weight: 200;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+        margin-right: 300px;
+    
+        &:hover {
+            background-color: #29566F;
+        }
     }
 }
 
@@ -78,22 +99,3 @@
     }
 }
 
-.back-profile {
-    background-color: #05CCF8;
-    color: white;
-    border: none;
-    width: 90px;
-    height: 30px;
-    padding: 6px 15px 15px 15px;
-    border-radius: 30px;
-    font-size: 15px;
-    font-weight: 200;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 20px;
-    margin-left: 750px;
-
-    &:hover {
-        background-color: #29566F;
-    }
-}

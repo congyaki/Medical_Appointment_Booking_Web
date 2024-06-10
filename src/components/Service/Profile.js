@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getPatientRecordOfCustomer } from '../../services/apiService';
 import '../../styles/Profile.scss';
 
-const PatientProfile = ({ patient, onDelete, onNextProfileClick, onSelectProfile }) => {
+const PatientProfile = ({ patient, onDelete, onNextProfileClick, onSelectProfile ,}) => {
     const handleProfileSelect = () => {
         onSelectProfile(patient); // Truyền thông tin hồ sơ bệnh nhân khi người dùng chọn hồ sơ
         onNextProfileClick(); // Chuyển đến bước tiếp theo
@@ -17,8 +17,9 @@ const PatientProfile = ({ patient, onDelete, onNextProfileClick, onSelectProfile
             <div className="buttons">
                 <button className="delete" onClick={() => onDelete(patient.id)}>Delete</button>
                 <button className="edit">Edit</button>
-                <button className="select-profile" onClick={handleProfileSelect}>Select Profile</button>
+                <button className="next" onClick={handleProfileSelect}>Next</button>
             </div>
+            
         </div>
     );
 };
@@ -65,8 +66,9 @@ const Profile = ({ onNextProfileClick, onBackClick, onSelectProfile }) => {
                         onSelectProfile={onSelectProfile} // Truyền hàm onSelectProfile xuống PatientProfile
                     />
                 ))}
+                <button className="back-profile" onClick={onBackClick}>Back</button>
             </div>
-            <button className="back-profile" onClick={onBackClick}>Back</button>
+            
         </div>
     );
 };

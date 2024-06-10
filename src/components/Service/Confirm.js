@@ -38,7 +38,7 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, sele
     return (
         <div className="appointment-details">
             <div className="confirm-examination">
-                <div className="header">Confirm examination information</div>
+                <div className="headerconfirm">Confirm examination information</div>
                 <table>
                     <thead>
                         <tr>
@@ -60,7 +60,7 @@ const Confirm = ({ onBackClick, selectedDoctor, selectedDate, selectedTime, sele
             </div>
 
             <div className="patient-information">
-                <div className="header">Patient information</div>
+                <div className="headerconfirm">Patient information</div>
                 <div className="info">
                     <p><strong>Name:</strong> {selectedProfile.name}</p>
                     <p><strong>Date of Birth:</strong> {selectedProfile.dob}</p>

@@ -7,8 +7,8 @@
     max-height: 100vh;
     align-items: center;
     flex-direction: column;
-    margin-top: 50px;
-
+    margin-top: 150px;
+    margin-bottom: 400px;
     @media (min-width: 640px) {
         flex-direction: row;
         border-left: 1px solid #e5e7eb;
@@ -17,7 +17,7 @@
     .calendar {
         width: 50%;
 
-        .header {
+        .headerdate {
             background-color: #05CCF8;
             color: white;
             display: flex;

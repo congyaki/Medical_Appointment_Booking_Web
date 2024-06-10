@@ -118,13 +118,15 @@ function Specialist({ specialties }) {
             )}
             {step === 2 && (
                 <div className="doctor-selection">
-                    <button className="back-button" onClick={handleBackClick}>Back</button>
-                    <DoctorCards doctors={doctors} onDoctorSelect={handleDoctorSelect}/>
+                    <DoctorCards 
+                        doctors={doctors} 
+                        onDoctorSelect={handleDoctorSelect} 
+                        onBackClick={handleBackClick}/>
                 </div>
             )}
             {step === 3 && (
                 <div className="calendar-selection">
-                    <button className="back-button" onClick={handleBackClick}>Back</button>
+                    
                     <Calendar
                         onNextClick={handleNextClick}
                         onBackClick={handleBackClick}

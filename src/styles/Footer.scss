@@ -1,85 +1,87 @@
 .footer {
     background-color: #05CCF8;
-    padding: 50px 100px 50px 100px;
+    padding: 50px 100px;
     color: #FFFFFF;
     margin-top: 70px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
+}
 
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
 
-        .footer-logo {
-            text-align: left;
+.footer-logo {
+    text-align: left;
+}
 
-            h2 {
-                font-size: 25px;
-                margin-bottom: 15px;
-                color: #FFFFFF;
-            }
+.footer-logo h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+    color: #FFFFFF;
+}
 
-            p {
-                font-size: 15px;
-                margin-bottom: 13px;
-            }
-        }
+.footer-logo p {
+    font-size: 15px;
+    margin-bottom: 13px;
+}
 
-        .footer-columns {
-            display: flex;
-            gap: 120px;
+.footer-columns {
+    display: flex;
+    gap: 120px;
+}
 
-            .column {
-                margin: 0 15px;
+.footer-columns .column {
+    margin: 0 15px;
+}
 
-                h3 {
-                    font-size: 20px;
-                    margin-bottom: 20px;
-                }
+.footer-columns .column h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
 
-                ul {
-                    list-style: none;
-                    padding: 0;
+.footer-columns .column ul {
+    list-style: none;
+    padding: 0;
+}
 
-                    li {
-                        margin-bottom: 10px;
+.footer-columns .column ul li {
+    margin-bottom: 10px;
+}
 
-                        a {
-                            color: white;
-                            text-decoration: none;
-                            font-size: 15px;
+.footer-columns .column ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
 
-                            &:hover {
-                                text-decoration: underline;
-                            }
-                        }
-                    }
-                }
-            }
+.footer-columns .column ul li a:hover {
+    text-decoration: underline;
+}
 
-            .follow-us {
-                .social-icons {
-                    display: flex;
-                    flex-direction: column;
+.follow-us .social-icons {
+    display: flex;
+    flex-direction: column;
+}
 
-                    a {
-                        display: flex;
-                        align-items: center;
-                        color: white;
-                        text-decoration: none;
-                        margin-bottom: 13px;
-                        font-size: 14px;
+.follow-us .social-icons a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 13px;
+    font-size: 14px;
+}
 
-                        i {
-                            margin-right: 0.5rem;
-                        }
+.follow-us .social-icons a i {
+    margin-right: 0.5rem;
+}
 
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                    }
-                }
-            }
-        }
-    }
+.follow-us .social-icons a:hover {
+    text-decoration: underline;
 }

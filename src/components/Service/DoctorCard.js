@@ -5,7 +5,7 @@ import logo from '../../assets/images/Logo.png';
 
 import { useNavigate } from 'react-router-dom';
 
-function DoctorCard({ doctor, onDoctorSelect }) {
+function DoctorCard({ doctor, onDoctorSelect, }) {
     const [rating, setRating] = useState(5); // Thiết lập mặc định là 5 sao
 
     const handleDoctorSelect = () => {
@@ -48,16 +48,20 @@ function DoctorCard({ doctor, onDoctorSelect }) {
     );
 }
 
-function DoctorCards({ doctors, onDoctorSelect }) {
+function DoctorCards({ doctors, onDoctorSelect, onBackClick }) {
     return (
-        <div className="doctor-cards">
-            {doctors.map(doctor => (
-                <DoctorCard
-                    key={doctor.id}
-                    doctor={doctor}
-                    onDoctorSelect={onDoctorSelect}
-                />
-            ))}
+        <div>
+            <div className="doctor-cards">
+                {doctors.map(doctor => (
+                    <DoctorCard
+                        key={doctor.id}
+                        doctor={doctor}
+                        onDoctorSelect={onDoctorSelect}
+                        onBackClick = {onBackClick}
+                    />
+                ))}
+            </div>
+            <button onClick={onBackClick} className='back-doctor'>Back</button>
         </div>
     );
 }

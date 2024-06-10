@@ -1,5 +1,12 @@
 .Service {
     font-family: Arial, sans-serif;
     background-color: #ECECEC;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
 
+.content {
+    flex: 1;
 }

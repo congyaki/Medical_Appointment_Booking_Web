@@ -38,7 +38,7 @@ export default function Calendar({ onNextClick, onBackClick }) {
     return (
         <div className="calendar-container">
             <div className="calendar">
-                <div className="header">
+                <div className="headerdate">
                     <SlArrowLeft
                         className="icon"
                         onClick={() => {
